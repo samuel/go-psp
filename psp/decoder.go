@@ -216,7 +216,7 @@ func (d *decoder) readHeader() {
 			d.error(UnsupportedError(fmt.Sprintf("unsupported bit depth %d", d.bitDepth)))
 		}
 	}
-	fmt.Printf("%+v\n", d)
+	// fmt.Printf("%+v\n", d)
 }
 
 func (d *decoder) decode() image.Image {
@@ -355,7 +355,7 @@ func (d *decoder) decodeLayers() (image.Image, *layer) {
 				layer.bitmapCount = d.readUint16()
 				layer.channelCount = d.readUint16()
 			}
-			fmt.Printf("%+v\n", layer)
+			// fmt.Printf("%+v\n", layer)
 			if layer.channelCount == 0 {
 				break
 			}
@@ -395,7 +395,7 @@ func (d *decoder) decodeLayers() (image.Image, *layer) {
 				}
 			}
 			compressedLayerLen := int(d.readUint32())
-			uncompressedImageLen := int(d.readUint32())
+			// uncompressedImageLen := int(d.readUint32())
 			bitmapType := bitmapType(d.readUint16())
 			channelType := channelType(d.readUint16())
 			if bitmapType != dibImage {
@@ -408,11 +408,11 @@ func (d *decoder) decodeLayers() (image.Image, *layer) {
 				}
 				break
 			}
-			fmt.Printf("Channel\n")
-			fmt.Printf("\tcompressed layer len = %d\n", compressedLayerLen)
-			fmt.Printf("\tuncompressed image len = %d\n", uncompressedImageLen)
-			fmt.Printf("\tbitmap type = %s\n", bitmapType)
-			fmt.Printf("\tchannel type = %s\n", channelType)
+			// fmt.Printf("Channel\n")
+			// fmt.Printf("\tcompressed layer len = %d\n", compressedLayerLen)
+			// fmt.Printf("\tuncompressed image len = %d\n", uncompressedImageLen)
+			// fmt.Printf("\tbitmap type = %s\n", bitmapType)
+			// fmt.Printf("\tchannel type = %s\n", channelType)
 
 			if cap(d.tmpBuf) < layerBytes {
 				d.tmpBuf = make([]byte, layerBytes)
@@ -607,7 +607,7 @@ func (d *decoder) decodeChunkHeader(buf []byte, ch *chunkHeader) {
 	}
 	ch.fieldKeyword = decodeUint16(buf[4:6])
 	ch.dataLen = decodeUint32(buf[6:10])
-	fmt.Printf("CHUNK %+v\n", ch)
+	// fmt.Printf("CHUNK %+v\n", ch)
 }
 
 // readBlockHeader reads the next block from the file. it accepts a block
@@ -626,7 +626,7 @@ func (d *decoder) readBlockHeader(bh *blockHeader) {
 		d.error(FormatError("bad block magic"))
 	}
 	bh.id = blockID(decodeUint16(d.tmpBuf[4:6]))
-	fmt.Printf("BLOCK %s %+v\n", bh.id, bh)
+	// fmt.Printf("BLOCK %s %+v\n", bh.id, bh)
 }
 
 func decodeUint16(b []byte) uint16 {
