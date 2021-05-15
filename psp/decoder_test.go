@@ -45,8 +45,8 @@ func TestDecode(t *testing.T) {
 }
 
 func TestDecodeConfig(t *testing.T) {
-	// f, err := os.Open("3000939.psp")
-	f, err := os.Open("Nibbler.pspimage")
+	f, err := os.Open("../testdata/3000939.psp")
+	// f, err := os.Open("Nibbler.pspimage")
 	if err != nil {
 		t.Fatal(err)
 	}
